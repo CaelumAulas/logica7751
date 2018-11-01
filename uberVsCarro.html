@@ -1,0 +1,42 @@
+<meta charset="utf-8">
+<h1>Uber vs Carro</h1>
+
+<script src="js/pegaNumero.js"></script>
+<script src="js/libRelogio.js"></script>
+
+<h2>Uber</h2>
+<script>
+  var distancia = pegaNumero("Qual a distância que será percorrida?")
+  var velocidadeMedia = pegaNumero("Qual a velocidade média do carro?")
+
+  var tempoEmHoras = distancia / velocidadeMedia
+  var tempoEmMinutos = tempoEmHoras * 60
+  var taxaUber = 2
+  var totalUber = taxaUber + (distancia * 1.4) + (tempoEmMinutos * 0.26)
+
+  var tempoFormatado = formataRelogio(tempoEmMinutos)
+
+  document.write(`
+    Tempo: ${tempoFormatado}
+    <br>
+    Total: R$ ${totalUber.toFixed(2).replace(".",",")}
+  `)
+</script>
+
+<h2>Carro</h2>
+<script>
+  var autonomia = pegaNumero("Qual a autonomia do seu carro?")
+  var litroGasolina = pegaNumero("Qual o valor do litro da gasolina?")
+  var totalEstacionamento = pegaNumero("Quanto você gasta com estacionamento?")
+
+  var totalGasolina = (distancia / autonomia) * litroGasolina
+  var totalCarro = totalGasolina + totalEstacionamento
+
+  document.write(`
+    Gasolina: R$ ${totalGasolina.toFixed(2).replace(".",",")}
+    <br>
+    Estacionamento: R$ ${totalEstacionamento.toFixed(2).replace(".",",")}
+    <br>
+    Total: R$ ${totalCarro.toFixed(2).replace(".",",")}
+  `)
+</script>

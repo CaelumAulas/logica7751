@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<h1>Jogo de Adivinhação</h1>
+<button onclick="jogar()">JOGAR</button>
+
+<script src="js/mostra.js"></script>
+
+<script>
+  var contador = 0
+  function jogar() {
+    contador = contador + 1
+
+    var numeroMisterioso = prompt("Qual é o número misterioso?")
+    var chute = prompt("Qual é o seu chute?")
+    var mensagemJogo
+
+    if (numeroMisterioso == chute) {
+      mensagemJogo = "Acertou!!! O número misterioso era " + numeroMisterioso + "."
+    }
+    // if (numeroMisterioso != chute) {
+    else {
+      mensagemJogo = "Errou!!! O número misterioso era " + numeroMisterioso + "."
+    }
+
+    mostra(`
+      <hr>
+      Jogo ${contador}: ${mensagemJogo}
+    `)
+  }
+</script>

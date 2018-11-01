@@ -1,0 +1,91 @@
+<meta charset="utf-8">
+<h1>Cadastro Academia Caelum</h1>
+
+<script src="js/libIdade.js"></script>
+<script src="js/libBrasil.js"></script>
+<script src="js/mostra.js"></script>
+
+Nome:
+<br>
+<input type="text" id="campoNome">
+<br><br>
+<!-- id serve para dar nome ao campo para depois conseguir pegar o valor que o usuário digitou-->
+
+Peso:
+<br>
+<input type="text" id="campoPeso">
+<br><br>
+
+Altura:
+<br>
+<input type="text" id="campoAltura">
+<br><br>
+
+Data de Nascimento:
+<br>
+<input type="text" id="campoDataDeNascimento">
+<br><br>
+
+<input type="checkbox" id="campoCardiaco">Tem problemas cardíacos
+<br><br>
+
+<button onclick="criarFicha()">Enviar</button>
+
+<script>
+  var contador = 0
+  function criarFicha() {
+    contador = contador + 1
+
+    // var mensagemFichas
+    if (contador == 1) {
+      mostra(`<h2>Fichas</h2>`)
+      // mensagemFichas = "Fichas"
+      // mostra(`${mensagemFichas}`)
+    }
+
+    var nome = campoNome.value
+    var peso = parseFloatBrasil(campoPeso.value)
+    var altura = parseFloat(campoAltura.value.replace(",","."))
+    var dataDeNascimento = campoDataDeNascimento.value
+
+    var dataQuebrada = dataDeNascimento.split("/")
+    var diaDeNascimento = dataQuebrada[0]
+    var mesDeNascimento = dataQuebrada[1]
+    var anoDeNascimento = dataQuebrada[2]
+
+    var idade = calculaIdade(diaDeNascimento, mesDeNascimento, anoDeNascimento)
+    var ehCrianca = idade < 16
+
+    var cardiaco = campoCardiaco.checked
+    var mensagemCardiaco
+
+    if (cardiaco || ehCrianca) {
+      mensagemCardiaco = "Necessita de acompanhamento médico"
+    }
+    if (!cardiaco && !ehCrianca) {
+      mensagemCardiaco = "Não necessita de acompanhamento médico"
+    }
+
+    // se (cardiaco está selecionado OU é menor que 16 anos)
+    //    mensagem = "Necessita de acompanhamento médico"
+    // se (cardico não estiver selecionado E não é menor que 16 anos)
+    //    mensagem = "Não necessita de acompanhamento médico"
+
+    mostra(`
+      <hr>
+      Ficha ${contador}
+      <hr>
+      Nome: ${nome}
+      <br>
+      Peso: ${formataFloatBrasil(peso)} kg
+      <br>
+      Altura: ${altura.toFixed(2).replace(".",",")} m
+      <br>
+      Data de nascimento: ${dataDeNascimento}
+      <br>
+      Idade: ${idade} anos
+      <br>
+      ${mensagemCardiaco}
+    `)
+  }
+</script>
