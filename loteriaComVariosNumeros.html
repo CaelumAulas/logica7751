@@ -1,5 +1,8 @@
 <meta charset="utf-8">
-<h1>Loteria</h1>
+<h1>Loteria com Vários Números</h1>
+Quantos números você quer sortear?
+<input type="text" id="campoNumerosSorteado">
+<br><br>
 <button onclick="jogar()">JOGAR</button>
 
 <script src="js/mostra.js"></script>
@@ -8,8 +11,12 @@
   function jogar() {
     contador = contador + 1
 
-    var numeroMisterioso = parseInt(Math.random()*100)
-    console.log(numeroMisterioso)
+    var listaDeNumerosMisteriosos = []
+
+    for (var i = 0 ; i < campoNumerosSorteado.value ; i++) {
+      var numeroMisterioso = parseInt(Math.random()*100)
+      listaDeNumerosMisteriosos.push(numeroMisterioso)
+    }
 
     var chute = prompt("Qual o seu chute? Número entre 0 e 100")
     var qtdTentativas = 0
@@ -23,11 +30,11 @@
     }
 
     var mensagemJogo
-    if (numeroMisterioso == chute) {
-      mensagemJogo = "Acertou!!! O número misterioso era " + numeroMisterioso + "."
+    if (listaDeNumerosMisteriosos.includes(chute)) {
+      mensagemJogo = "Acertou!!! Os números misteriosos eram " + listaDeNumerosMisteriosos + "."
     }
     else {
-      mensagemJogo = "Errou!!! O número misterioso era " + numeroMisterioso + "."
+      mensagemJogo = "Errou!!! Os números misteriosos eram " + listaDeNumerosMisteriosos + "."
     }
 
     mostra(`
